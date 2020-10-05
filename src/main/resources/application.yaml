@@ -1,0 +1,17 @@
+app.greeting: Hello
+
+server.port: 8080
+server.host: 0.0.0.0
+
+mp:
+  messaging:
+    incoming:
+      IncomingQueue:
+        connector: smallrye-jms
+        # Same queue is used for simplifying test case
+        destination: test-queue
+    outgoing:
+      OutgoingQueue:
+        connector: smallrye-jms
+        # Same queue is used for simplifying test case
+        destination: test-queue
