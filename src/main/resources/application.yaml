@@ -9,9 +9,9 @@ mp:
       IncomingQueue:
         connector: smallrye-jms
         # Same queue is used for simplifying test case
-        destination: test-queue
+        destination: ./TestJMSModule!IncomingQueue
     outgoing:
       OutgoingQueue:
         connector: smallrye-jms
         # Same queue is used for simplifying test case
-        destination: test-queue
+        destination: ./TestJMSModule!IncomingQueue

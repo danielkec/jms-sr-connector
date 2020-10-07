@@ -1,4 +1,4 @@
-# Helidon MP Bare
+# Helidon MP JMS Messaging with WLS JMS
 
 POC for using SmallRye JMS connector with Helidon Messaging
 
@@ -8,14 +8,15 @@ NOTICE:
 * Tested with Artemis active MQ eg. JMS 2.0 api(smallrye is not backward compatible)
   Weblogic supports JMS 2.0 api since 12.2.1
 
-```
-docker run -it --rm  \
--e DISABLE_SECURITY=true \
--p 8161:8161 \
--p 61616:61616 \
--e ARTEMIS_USERNAME=kec \
--e ARTEMIS_PASSWORD=kec \ 
-vromero/activemq-artemis
+```shell script
+# Install wlthint3client.jar to local msv repo
+mvn install:install-file \
+-Dfile=./wlthint3client.jar \
+-DgeneratePom=true \
+-DgroupId=custom.com.oracle \
+-DartifactId=wlthint3client \
+-Dversion=12.2.1.3 \
+-Dpackaging=jar
 
 mvn package
 java -jar target/jms-sr.jar
