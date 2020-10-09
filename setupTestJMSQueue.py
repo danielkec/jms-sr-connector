@@ -30,7 +30,6 @@ def createJMSModule(jms_module_name, adm_name, sub_deployment_name):
         cd('/SystemResources/'+jms_module_name)
         module.createSubDeployment(sub_deployment_name)
         cd('/SystemResources/'+jms_module_name+'/SubDeployments/'+sub_deployment_name)
-        cmo.addTarget(getMBean("/JMSServers/TestJMSServer"))
 
         list=[]
         for i in jms_servers:
