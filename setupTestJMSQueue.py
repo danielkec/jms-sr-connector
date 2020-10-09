@@ -40,13 +40,6 @@ def getJMSModulePath(jms_module_name):
         jms_module_path = "/JMSSystemResources/"+jms_module_name+"/JMSResource/"+jms_module_name
         return jms_module_path
  
-def createJMSTEMP(jms_module_name,jms_temp_name):
-        jms_module_path= getJMSModulePath(jms_module_name)
-        cd(jms_module_path)
-        cmo.createTemplate(jms_temp_name)
-        cd(jms_module_path+'/Templates/'+jms_temp_name)
-        cmo.setMaximumMessageSize(20)
- 
 def createJMSQueue(jms_module_name,jms_queue_name):
         print "Creating JMS queue " + jms_queue_name
         jms_module_path = getJMSModulePath(jms_module_name)
