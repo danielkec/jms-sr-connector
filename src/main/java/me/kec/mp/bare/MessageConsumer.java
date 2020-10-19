@@ -7,9 +7,14 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 @ApplicationScoped
 public class MessageConsumer {
 
-    @Incoming("IncomingQueue")
-    public void consume(String message) {
-        System.out.println("Message: " + message);
+    @Incoming("IncomingQueue1")
+    public void consume1(String message) {
+        System.out.println("ms1: " + message);
+    }
+
+    @Incoming("IncomingQueue2")
+    public void consume2(String message) {
+        System.out.println("ms2: " + message);
     }
 
 }

@@ -48,6 +48,12 @@
         <dependency>
             <groupId>io.helidon.microprofile.messaging</groupId>
             <artifactId>helidon-microprofile-messaging</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.microprofile.reactive.messaging</groupId>
+                    <artifactId>microprofile-reactive-messaging-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

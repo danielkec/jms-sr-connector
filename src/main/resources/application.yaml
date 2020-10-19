@@ -6,12 +6,20 @@ server.host: 0.0.0.0
 mp:
   messaging:
     incoming:
-      IncomingQueue:
+      IncomingQueue1:
         connector: smallrye-jms
-        # Same queue is used for simplifying test case
-        destination: ./TestJMSModule!IncomingQueue
+        # Listening from managed queues so load balancing is transparent
+        destination: ./TestJMSModule!ms1@osm_events
+      IncomingQueue2:
+        connector: smallrye-jms
+        # Listening from managed queues so load balancing is transparent
+        destination: ./TestJMSModule!ms2@osm_events
     outgoing:
       OutgoingQueue:
         connector: smallrye-jms
-        # Same queue is used for simplifying test case
-        destination: ./TestJMSModule!IncomingQueue
+        # Sending to UDD so its manages load balancing
+        destination: TestJMSModule!osm_events
+      To-UDD:
+        connector: smallrye-jms
+        # Sending to UDD so its manages load balancing
+        destination: TestJMSModule!osm_events

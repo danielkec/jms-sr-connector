@@ -49,6 +49,20 @@ def createJMSQueue(jms_module_name,jms_queue_name):
         cmo.setJNDIName("jms/" + jms_queue_name)
         cmo.setSubDeploymentName(sub_deployment_name)
 
+def createDistributedJMSQueue(jms_module_name,jms_queue_name):
+        print "Creating distributed JMS queue " + jms_queue_name
+        jms_module_path = getJMSModulePath(jms_module_name)
+        cd(jms_module_path)
+        cmo.createDistributedQueue(jms_queue_name)
+        cd(jms_module_path+'/DistributedQueues/'+jms_queue_name)
+        cmo.setJNDIName("jms/" + jms_queue_name)
+
+def addMemberQueue(udd_name,queue_name):
+        jms_module_path = getJMSModulePath(jms_module_name)
+        cd(jms_module_path+'/DistributedQueues/'+udd_name)
+        cmo.setLoadBalancingPolicy('Round-Robin')
+        cmo.createDistributedQueueMember(queue_name)
+
 def createJMSFactory(jms_module_name,jms_fact_name):
         print "Creating JMS connection factory " + jms_fact_name
         jms_module_path = getJMSModulePath(jms_module_name)
@@ -69,6 +83,14 @@ createJMSServer(adm_name,jms_server_name)
 createJMSModule(jms_module_name,adm_name,sub_deployment_name)
 createJMSFactory(jms_module_name,factory_name)
 createJMSQueue(jms_module_name,queue_name)
+
+### UDD example
+createDistributedJMSQueue(jms_module_name,"osm_events")
+# Normally member queues would be in different sub-deployments
+createJMSQueue(jms_module_name,"ms1@osm_events")
+createJMSQueue(jms_module_name,"ms2@osm_events")
+addMemberQueue("osm_events", "ms1@osm_events")
+addMemberQueue("osm_events", "ms2@osm_events")
 
 save()
 activate(block="true")
