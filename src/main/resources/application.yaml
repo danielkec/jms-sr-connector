@@ -8,10 +8,12 @@ mp:
     incoming:
       IncomingQueue1:
         connector: smallrye-jms
+        session-mode: CLIENT_ACKNOWLEDGE
         # Listening from managed queues so load balancing is transparent
         destination: ./TestJMSModule!ms1@osm_events
       IncomingQueue2:
         connector: smallrye-jms
+        session-mode: CLIENT_ACKNOWLEDGE
         # Listening from managed queues so load balancing is transparent
         destination: ./TestJMSModule!ms2@osm_events
     outgoing:
